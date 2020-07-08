@@ -1,0 +1,30 @@
+function solution(N, users) {
+    var answer = [];
+    var userPerStages = {}; 
+
+  //get total user per stage which not clear the stage yet
+  users.forEach(element => (userPerStages[element]) ? userPerStages[element] = userPerStages[element]+1 : userPerStages[element] = 1);
+
+  let tempAns = [];
+  
+  //get ratio per stage
+  let currUsers = users.length;
+  for(let i = 1 ; i <= N; i++){
+    
+    
+    let ratio = 0;
+    if(userPerStages[i]){
+      ratio = (userPerStages[i]/ currUsers);
+    }
+    tempAns.push({"stage":i,"ratio" : ratio});
+    currUsers -= (userPerStages[i]) ? userPerStages[i] : 0;
+  }
+
+  //ordering stage by highest ratio
+  tempAns.sort((a,b) => (a.ratio > b.ratio) ? -1 : ((b.ratio > a.ratio) ? 1 : 0));
+  tempAns.forEach(element => {
+    answer.push(element.stage);
+  });
+
+  return answer;
+}
