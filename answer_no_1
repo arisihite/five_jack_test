@@ -1,0 +1,18 @@
+function solution(record) {
+  let answer = [];
+  let users = {};
+  record.forEach(element => {
+     let commands = element.split(" ");
+     users[commands[1]] = commands[2];
+  });
+
+  record.forEach(element => {
+     let commands = element.split(" ");
+     if(commands[0]==="Enter"){
+       answer.push(users[commands[1]]+" came in");
+     }else if (commands[0]==="Leave"){
+       answer.push(users[commands[1]]+" has left");
+     }
+  });
+  return answer;
+}
